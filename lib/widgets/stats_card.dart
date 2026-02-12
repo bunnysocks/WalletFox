@@ -8,8 +8,9 @@ class StatsCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      shape: RoundedRectangleBorder(
+    return Expanded(
+      child: Card(
+        shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(12)
       ),
       child: Container(
@@ -27,6 +28,7 @@ class StatsCard extends StatelessWidget {
             Text(subtitle, style: Theme.of(context).textTheme.bodySmall?.copyWith(color: color), selectionColor: color,)
           ],
         ),
+      ),
       ),
     );
   }
