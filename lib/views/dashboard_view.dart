@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:walletfox/utils/constants/strings.dart';
 import 'package:walletfox/utils/styles/app_theme.dart';
 import 'package:walletfox/widgets/ai_card.dart';
+import 'package:walletfox/widgets/analysis_view.dart';
 import 'package:walletfox/widgets/notification_list_card.dart';
 import 'package:walletfox/widgets/stats_card.dart';
 import 'package:walletfox/widgets/subscription_tile.dart';
@@ -28,7 +29,7 @@ class _DashboardViewState extends State<DashboardView> {
 }
 
 Widget? _buildHome(BuildContext context) {
-  final subscriptionsList = [];
+  final subscriptionsList = [12];
   return SingleChildScrollView(
     padding: const EdgeInsets.all(16.0),
     child: Column(
@@ -52,16 +53,12 @@ Widget? _buildHome(BuildContext context) {
             Text("Notification & Insights", style: Theme.of(context).textTheme.bodyLarge,),
             Text("Upcoming Renewals", style: Theme.of(context).textTheme.bodyMedium,),
             const SizedBox(height: 10,),
-            ListView.separated(
+            ListView.builder(
               physics: NeverScrollableScrollPhysics(),
               shrinkWrap: true,
               itemBuilder: (context, index)
             {
               return NotificationListCard();
-            }, separatorBuilder: (context, index) {
-              return Divider(
-                color: Colors.grey,
-              );
             }, itemCount: 4)
           ],
         ),
@@ -86,7 +83,11 @@ Widget? _buildHome(BuildContext context) {
           itemBuilder: (context, index) 
           {
             return SubscriptionTile(index: index);
-          })
+          }),
+
+          AnalysisView(),
+
+          const SizedBox(height: 80,)
       ],
     ),
   );
