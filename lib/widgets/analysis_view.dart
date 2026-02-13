@@ -3,6 +3,15 @@ import 'package:flutter/material.dart';
 import 'package:walletfox/utils/styles/app_theme.dart';
 import 'package:walletfox/widgets/pie_chart_indicator.dart';
 
+List<String> categories = [
+    "entertainment",
+    "sports",
+    "sass",
+    "utilities",
+    "health",
+    "others"
+  ];
+
 class AnalysisView extends StatefulWidget {
   const AnalysisView({super.key});
 
@@ -12,14 +21,6 @@ class AnalysisView extends StatefulWidget {
 
 class _AnalysisViewState extends State<AnalysisView> {
   int touchedIndex = -1;
-  List<String> categories = [
-    "entertainment",
-    "sports",
-    "sass",
-    "utilities",
-    "health",
-    "others"
-  ];
   @override
   Widget build(BuildContext context) {
     return Column(

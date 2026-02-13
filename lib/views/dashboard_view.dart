@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:walletfox/utils/constants/strings.dart';
 import 'package:walletfox/utils/styles/app_theme.dart';
+import 'package:walletfox/views/add_subscription_view.dart';
 import 'package:walletfox/widgets/ai_card.dart';
 import 'package:walletfox/widgets/analysis_view.dart';
+import 'package:walletfox/widgets/empty_state.dart';
 import 'package:walletfox/widgets/notification_list_card.dart';
 import 'package:walletfox/widgets/stats_card.dart';
 import 'package:walletfox/widgets/subscription_tile.dart';
@@ -24,6 +26,8 @@ class _DashboardViewState extends State<DashboardView> {
         centerTitle: false,
       ),
       body: _buildHome(context),
+      floatingActionButton: FloatingActionButton(onPressed: () => Navigator.of(context,).push(MaterialPageRoute(builder: (_) => AddSubscriptionView())), child: const Icon(Icons.add),
+      ),
     );
   }
 }
@@ -69,12 +73,7 @@ Widget? _buildHome(BuildContext context) {
         ),
 
         subscriptionsList.isEmpty
-          ? Center(
-            child: Container(
-              margin: const EdgeInsets.symmetric(vertical: 10),
-              child: Text("No Subscriptions yet - Add on!"),
-            ),
-          )
+          ? EmptyState(title: "No Subscriptions yet", subtitle: 'Add one')
           :
           ListView.builder(
           physics: NeverScrollableScrollPhysics(),
