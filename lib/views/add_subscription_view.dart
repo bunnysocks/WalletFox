@@ -5,7 +5,7 @@ import 'package:walletfox/utils/styles/app_theme.dart';
 import 'package:walletfox/widgets/analysis_view.dart';
 
 class AddSubscriptionView extends StatelessWidget {
-  AddSubscriptionView({super.key});
+  const AddSubscriptionView({super.key});
 
   
 

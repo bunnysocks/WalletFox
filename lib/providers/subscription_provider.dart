@@ -94,5 +94,43 @@ class SubscriptionProvider extends ChangeNotifier {
     category = "entertainment";
   }
 
+  double totalMonthlyCost() {
+    double total = 0;
+    for (var sub in subscriptions) {
+      final monthly = sub.monthlyCost * (30 / _getDays(sub.billingCycle.toLowerCase()));
+      total += monthly;
+    }
+
+    return total;
+  }
   
+  int _getDays(String billingCycle) {
+    return switch(billingCycle) {
+      'daily' => 1,
+      'weekly' => 7,
+      'monthly' => 30,
+      'yearly' => 365,
+      'never' => 30,
+      _ => 30,
+    };
+  }
+
+
+  //Spending per category for the pie chart
+  Map<String, double> spendingPerCategory() {
+    final Map<String, double> data = {};
+    for(final sub in subscriptions) {
+      data[sub.category.toLowerCase()] = (data[sub.category] ?? 0) + sub.monthlyCost;
+    }
+
+
+    return data;
+  }
+
+
+  List<SubscriptionModel> upcomingRenewalSubs() {
+    final now = DateTime.now();
+    final upcoming = now.add(const Duration(days: 7));
+    return subscriptions.where((sub) => sub.nextBillingDate.isAfter(now) && sub.nextBillingDate.isBefore(upcoming)).toList();
+  }
 }

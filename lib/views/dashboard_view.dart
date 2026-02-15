@@ -36,7 +36,8 @@ class _DashboardViewState extends State<DashboardView> {
 }
 
 Widget? _buildHome(BuildContext context, SubscriptionProvider subVm) {
-  // final subscriptionsList = [];
+  final totalMonthlyCost = subVm.totalMonthlyCost();
+  final upcomingRenewalSubs = subVm.upcomingRenewalSubs();
 
   return SingleChildScrollView(
     padding: const EdgeInsets.all(16.0),
@@ -47,8 +48,8 @@ Widget? _buildHome(BuildContext context, SubscriptionProvider subVm) {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            StatsCard(title: 'Total Monthly Spend', value: '\$ 100', subtitle: '4 subscriptions', color: AppColors.blue),
-            StatsCard(title: 'Upcoming Renewals', value: '2', subtitle: 'in the next 7 days', color: AppColors.blue),
+            StatsCard(title: 'Total Monthly Spend', value: '₹$totalMonthlyCost', subtitle: '4 subscriptions', color: AppColors.blue),
+            StatsCard(title: 'Upcoming Renewals', value: upcomingRenewalSubs.length.toString(), subtitle: 'in the next 7 days', color: AppColors.blue),
           ],
         ),
 

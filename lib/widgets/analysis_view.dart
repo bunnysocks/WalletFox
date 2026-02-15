@@ -1,7 +1,6 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:walletfox/model/subscription_model.dart';
 import 'package:walletfox/providers/subscription_provider.dart';
 import 'package:walletfox/utils/styles/app_theme.dart';
 import 'package:walletfox/widgets/pie_chart_indicator.dart';
@@ -108,10 +107,11 @@ class _AnalysisViewState extends State<AnalysisView> {
       const shadows = [Shadow(color: Colors.black, blurRadius: 2)];
 
       final category = subVm.categories[index].toLowerCase();
+      final spendingByCategory = subVm.spendingPerCategory();
       return PieChartSectionData(
         color: categoryColors(category),
-        value: 45,
-        title: "45%",
+        value: spendingByCategory[category],
+        title: "${(spendingByCategory[category] ?? 0) / 100}",
         radius: radius,
         titleStyle: Theme.of(context).textTheme.bodyLarge?.copyWith(
           fontWeight: FontWeight.bold,
